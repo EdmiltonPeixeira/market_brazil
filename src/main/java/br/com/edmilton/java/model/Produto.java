@@ -1,15 +1,10 @@
 package br.com.edmilton.java.model;
 
-import java.util.Arrays;
-
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +17,8 @@ public class Produto {
 	@Column
 	private String nome;
 	
-	private String imagem;
+	@Column
+	private String urlDaImagem;
 	
 	@Column
 	private String descricao;
@@ -35,8 +31,8 @@ public class Produto {
 		return nome;
 	}
 
-	public String getImagem() {
-		return imagem;
+	public String getUrlDaImagem() {
+		return urlDaImagem;
 	}
 
 	public String getDescricao() {
@@ -51,8 +47,8 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
+	public void setUrlDaImagem(String urlDaImagem) {
+		this.urlDaImagem = urlDaImagem;
 	}
 
 	public void setDescricao(String descricao) {
