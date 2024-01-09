@@ -36,28 +36,29 @@ public class ProdutoBean implements Serializable{
 	public String salvar(Produto produto) {
 		ProdutoDao produtoDao = new ProdutoDao();
 		produtoDao.salvar(produto);
-		return "/index.xhtml";
+		return "/produtosCadastrados.xhtml";
 	}
 	
-	public String editar(Integer id) {
-		ProdutoDao produtoDao = new ProdutoDao();
-		Produto produto = new Produto();
-		produto = produtoDao.findProduto(id);
+	public String editar(Produto produto) {
+		/*
+		 * ProdutoDao produtoDao = new ProdutoDao(); Produto produto = new Produto();
+		 * produto = produtoDao.findProduto(id);
+		 */
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		sessionMap.put("produto", produto);
-		return "/editar.xhtml?faces-redirect=true";
+		return "/editar.xhtml";
 	}
 	
 	public String atualizar(Produto produto) {
 		ProdutoDao produtoDao = new ProdutoDao();
 		produtoDao.editar(produto);
-		return "/index.xhtml";
+		return "/produtosCadastrados.xhtml";
 	}
 	
 	public String excluir(Produto p) {
 		ProdutoDao produtoDao = new ProdutoDao();
 		produtoDao.excluir(p);
-		return "/index.xhtml";
+		return "/produtosCadastrados.xhtml";
 	}
 	
 	@PostConstruct
