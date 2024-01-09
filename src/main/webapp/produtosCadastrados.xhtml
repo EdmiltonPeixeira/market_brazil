@@ -33,6 +33,9 @@
 			<p:column headerText="Descrição">
 				<h:outputText value="#{produto.descricao}"></h:outputText>
 			</p:column>
+			<p:column headerText="Preço">
+				<h:outputText value="#{produto.preco}"></h:outputText>
+			</p:column>
 			<p:column headerText="Editar">
 				<h:commandButton action="#{produtoBean.editar(produto)}" value="Editar"></h:commandButton>
 			</p:column>

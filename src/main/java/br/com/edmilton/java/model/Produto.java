@@ -22,6 +22,9 @@ public class Produto {
 	
 	@Column
 	private String descricao;
+	
+	@Column
+	private Double preco;
 
 	public Integer getId() {
 		return id;
@@ -53,5 +56,13 @@ public class Produto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 }

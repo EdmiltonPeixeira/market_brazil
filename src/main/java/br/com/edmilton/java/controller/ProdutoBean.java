@@ -18,6 +18,10 @@ import java.util.Map;
 @ViewScoped
 public class ProdutoBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8958178633452066035L;
 	private ProdutoDao produtoDao;
 	private List<Produto> listaProdutos;
 	
