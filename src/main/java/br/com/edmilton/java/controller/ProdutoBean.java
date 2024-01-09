@@ -1,19 +1,84 @@
 package br.com.edmilton.java.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
-import br.com.edmilton.java.dao.ProdutoDAO;
+import br.com.edmilton.java.dao.ProdutoDao;
 import br.com.edmilton.java.model.Produto;
 
+import java.util.Map;
+
 @ManagedBean (name = "produtoBean")
-@RequestScoped
-public class ProdutoBean {
-	public List<Produto> consultarTodos(){
-		ProdutoDAO produtoDAO = new ProdutoDAO();
-		return produtoDAO.consultarProdutos();
+@ViewScoped
+public class ProdutoBean implements Serializable{
+	
+	private ProdutoDao produtoDao;
+	private List<Produto> listaProdutos;
+	
+	public ProdutoBean() {
+		this.produtoDao = new ProdutoDao();
+		this.listaProdutos = new ArrayList<>();
+	}
+	
+	public String cadastrar() {
+		Produto produto = new Produto();
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("produto", produto);
+		return "/cadastro.xhtml?faces-redirect=true";
+	}
+	
+	public String salvar(Produto produto) {
+		ProdutoDao produtoDao = new ProdutoDao();
+		produtoDao.salvar(produto);
+		return "/index.xhtml";
+	}
+	
+	public String editar(Integer id) {
+		ProdutoDao produtoDao = new ProdutoDao();
+		Produto produto = new Produto();
+		produto = produtoDao.findProduto(id);
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("produto", produto);
+		return "/editar.xhtml?faces-redirect=true";
+	}
+	
+	public String atualizar(Produto produto) {
+		ProdutoDao produtoDao = new ProdutoDao();
+		produtoDao.editar(produto);
+		return "/index.xhtml";
+	}
+	
+	public String excluir(Produto p) {
+		ProdutoDao produtoDao = new ProdutoDao();
+		produtoDao.excluir(p);
+		return "/index.xhtml";
+	}
+	
+	@PostConstruct
+	public List<Produto> getProdutos() {
+		listaProdutos = produtoDao.lista();
+		return listaProdutos;
+	}
+
+	public List<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+
+	public void setProdutos(List<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
+	}
+
+	public ProdutoDao getProdutoDao() {
+		return produtoDao;
+	}
+
+	public void setProdutoDAO(ProdutoDao produtoDao) {
+		this.produtoDao = produtoDao;
 	}
 }

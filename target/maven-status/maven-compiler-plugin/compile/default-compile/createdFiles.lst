@@ -1,0 +1,4 @@
+br\com\edmilton\java\model\JPAUtil.class
+br\com\edmilton\java\model\Produto.class
+br\com\edmilton\java\controller\ProdutoBean.class
+br\com\edmilton\java\dao\ProdutoDAO.class

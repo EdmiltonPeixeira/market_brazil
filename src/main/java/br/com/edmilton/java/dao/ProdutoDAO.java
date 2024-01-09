@@ -1,42 +1,45 @@
 package br.com.edmilton.java.dao;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import br.com.edmilton.java.model.JPAUtil;
 import br.com.edmilton.java.model.Produto;
 
-public class ProdutoDAO {
-	EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
+public class ProdutoDao extends Dao<Produto> implements Serializable{
 	
-	public void salvar(Produto produto) {
-		entity.getTransaction().begin();
-		entity.persist(produto);
-		entity.getTransaction().commit();
-		JPAUtil.shutdown();
+	public Produto findProduto(Integer id) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			Produto produto = (Produto) em.createQuery("SELECT p from PRODUTOS p where p.id = '" + id + "'").getSingleResult();
+			return produto;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
-	public Produto consultar(int id) {
-		Produto produto = new Produto();
-		produto = entity.find(Produto.class, id);
-		JPAUtil.shutdown();
-		return produto;
+	public List<Produto> findById(Integer id){
+		EntityManager em = emf.createEntityManager();
+		try {
+			List<Produto> list = em.createQuery("SELECT p from PRODUTOS p where p.id = '" + id + "'").getResultList();
+			return list;
+		} catch (Exception e) {
+			return null;
+		} 
 	}
-	
-	public void editar(Produto produto) {
-		entity.getTransaction().begin();
-		entity.merge(produto);
-		entity.getTransaction().commit();
-		JPAUtil.shutdown();
+
+	@Override
+	public List<Produto> lista() {
+		EntityManager em = emf.createEntityManager();
+		try {
+			TypedQuery<Produto> query = (TypedQuery<Produto>) em.createNativeQuery("SELECT * FROM PRODUTOS", Produto.class);
+			List<Produto> list = query.getResultList();
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
-	public List<Produto> consultarProdutos(){
-		List<Produto> produtos = new ArrayList<>();
-		Query query = entity.createQuery("SELECT * FROM PRODUTOS ");
-		produtos = query.getResultList();
-		return produtos;
-	}
+
 }
