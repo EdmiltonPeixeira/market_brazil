@@ -62,4 +62,5 @@ public abstract class Dao<T> implements Serializable {
 	}
 	
 	public abstract List lista();
+
 }
