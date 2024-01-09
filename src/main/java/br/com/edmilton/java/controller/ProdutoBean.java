@@ -36,7 +36,7 @@ public class ProdutoBean implements Serializable{
 	public String salvar(Produto produto) {
 		ProdutoDao produtoDao = new ProdutoDao();
 		produtoDao.salvar(produto);
-		return "/produtosCadastrados.xhtml";
+		return "/produtosCadastrados.xhtml?faces-redirect=true";
 	}
 	
 	public String editar(Produto produto) {
@@ -46,19 +46,19 @@ public class ProdutoBean implements Serializable{
 		 */
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		sessionMap.put("produto", produto);
-		return "/editar.xhtml";
+		return "/editar.xhtml?faces-redirect=true";
 	}
 	
 	public String atualizar(Produto produto) {
 		ProdutoDao produtoDao = new ProdutoDao();
 		produtoDao.editar(produto);
-		return "/produtosCadastrados.xhtml";
+		return "/produtosCadastrados.xhtml?faces-redirect=true";
 	}
 	
 	public String excluir(Produto p) {
 		ProdutoDao produtoDao = new ProdutoDao();
 		produtoDao.excluir(p);
-		return "/produtosCadastrados.xhtml";
+		return "/produtosCadastrados.xhtml?faces-redirect=true";
 	}
 	
 	@PostConstruct

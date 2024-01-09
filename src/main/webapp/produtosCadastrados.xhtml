@@ -18,7 +18,7 @@
 	
 	<h:form id="form">
 		<p:commandButton action="#{produtoBean.cadastrar()}" value="Cadastrar novo produto"></p:commandButton>
-		<p:dataTable value="#{produtoBean.produtos}" var="produto" rows="10" paginator="true" paginatorPosition="botton"
+		<p:dataTable value="#{produtoBean.produtos}" var="produto" rows="10" paginator="true" paginatorPosition="bottom"
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
             rowsPerPageTemplate="5,10,15">
 			<p:column headerText="Id">
@@ -37,7 +37,7 @@
 				<h:commandButton action="#{produtoBean.editar(produto)}" value="Editar"></h:commandButton>
 			</p:column>
 			<p:column headerText="Excluir">
-				<h:commandButton action="#{produtoBean.excluir(produto.id)}" value="Excluir"></h:commandButton>
+				<h:commandButton action="#{produtoBean.excluir(produto)}" value="Excluir"></h:commandButton>
 			</p:column>
 		</p:dataTable>
 	</h:form>
