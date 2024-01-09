@@ -1,4 +1,6 @@
-br\com\edmilton\java\model\JPAUtil.class
+br\com\edmilton\java\controller\Bean.class
+br\com\edmilton\java\converter\ProdutoConverter.class
 br\com\edmilton\java\model\Produto.class
+br\com\edmilton\java\dao\ProdutoDao.class
 br\com\edmilton\java\controller\ProdutoBean.class
-br\com\edmilton\java\dao\ProdutoDAO.class
+br\com\edmilton\java\dao\Dao.class
